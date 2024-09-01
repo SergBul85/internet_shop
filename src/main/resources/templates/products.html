@@ -1,10 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <title>Products</title>
+    <title>Internet shop</title>
 </head>
 <body>
+<h1>Internet shop</h1>
+<h4>Товары:</h4>
+
+<div th:each="productqq : ${products}">
+    <span th:text="${productqq.title}"></span>
+    <a th:href="@{/product/{id}(id=${productqq.id})}">Подробнее ...</a>
+    <br><br>
+</div>
+<hr>
+<h3>Создать новый товар</h3>
+<form action="#" th:action="@{/product/create}" method="post" th:object="${product}">
+    Название товара:
+    <input th:field="*{title}"/><br/><br/>
+
+    Описание товара:
+    <input type="text" th:field="*{description}"/><br/><br/>
+
+    Цена товара:
+    <input type="number" th:field="*{price}" step="0.01" min="0"/><br/><br/>
+
+    Город:
+    <input type="text" th:field="*{city}"/><br/><br/>
+
+    Автор:
+    <input type="text" th:field="*{author}"/><br/><br/>
+
+    <input type="submit" value="Добавить товар">
+</form>
 
 </body>
 </html>
