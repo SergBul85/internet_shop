@@ -21,21 +21,23 @@
 </div>
 <hr>
 <h3>Создать новый товар</h3>
-<form action="#" th:action="@{/product/create}" method="post" th:object="${product}">
+<form th:action="@{/product/create}" method="post" th:object="${product}" enctype="multipart/form-data">
     Название товара:
     <input th:field="*{title}"/><br/><br/>
-
     Описание товара:
     <input type="text" th:field="*{description}"/><br/><br/>
-
     Цена товара:
     <input type="number" th:field="*{price}" step="0.01" min="0"/><br/><br/>
-
     Город:
     <input type="text" th:field="*{city}"/><br/><br/>
-
     Автор:
     <input type="text" th:field="*{author}"/><br/><br/>
+    Перввая фотография:
+    <input type="file" name="file1"/><br/><br/>
+    Вторая фотография:
+    <input type="file" name="file2"/><br/><br/>
+    Третья фотография:
+    <input type="file" name="file3"/><br/><br/>
 
     <input type="submit" value="Добавить товар">
 </form>

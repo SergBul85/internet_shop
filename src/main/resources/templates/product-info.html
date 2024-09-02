@@ -6,6 +6,12 @@
 </head>
 <body>
 <h4>Подробная информация о товаре</h4>
+
+<img th:src="@{'/images/' + ${product.getImages().get(0).getId() }}" height="60px"><br><br>
+<img th:src="@{'/images/' + ${product.getImages().get(1).getId() }}" height="60px"><br><br>
+<img th:src="@{'/images/' + ${product.getImages().get(2).getId() }}" height="60px"><br><br>
+
+<b>ID товара: </b> <span th:text="${product.id}"></span><br><br>
 <b>Название товара: </b> <span th:text="${product.title}"></span><br><br>
 <b>Описание товара: </b> <span th:text="${product.description}"></span><br><br>
 <b>Цена товара: </b> <span th:text="${product.price}"></span><br><br>
