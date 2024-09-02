@@ -1,43 +1,40 @@
 package com.hstn.internet_shop.services;
 
 import com.hstn.internet_shop.models.Product;
+import com.hstn.internet_shop.repositories.ProductRepository;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
+
 @Service
+@Slf4j
+@RequiredArgsConstructor
 public class ProductService {
 
-    private List<Product> products = new ArrayList<>();
-    private long ID = 0;
+    private final ProductRepository productRepository;
 
-    {
-        products.add(new Product(++ID, "PlayStation 5", "Description PL 5", 67000, "Moscow", "Kolia"));
-        products.add(new Product(++ID, "Iphone 5", "Description iPhone 5", 7000, "Piter", "Vasia"));
-        products.add(new Product(++ID, "Car", "Mazda", 120000, "Tokio", "Nakamoto"));
-    }
-
-    public List<Product> listProducts() {
-        return products;
+    public List<Product> listProducts(String title) {
+        if (title != null) {
+            return productRepository.findByTitle(title);
+        }
+        return productRepository.findAll();
     }
 
     public void saveProduct(Product product) {
-        product.setId(++ID);
-        products.add(product);
+        log.info("Saving new {}", product);
+        productRepository.save(product);
     }
 
     public void deleteProduct(Long id) {
-        products.removeIf(product -> product.getId() == id);
+        productRepository.deleteById(id);
     }
 
     public Product getProductById(Long id) {
-        for (Product product : products) {
-            if (product.getId() == id) {
-                return product;
-            }
-        }
-        return null;
+        return productRepository.findById(id).orElse(null);
     }
 
 

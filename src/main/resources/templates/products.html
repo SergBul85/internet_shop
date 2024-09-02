@@ -7,8 +7,13 @@
 </head>
 <body>
 <h1>Internet shop</h1>
+<!-- -->
+<form action="/" method="get">
+    Поиск по названию объявления: <input type="text" name="title">
+    <input type="submit" value="Поиск">
+</form>
+<!-- -->
 <h4>Товары:</h4>
-
 <div th:each="productqq : ${products}">
     <span th:text="${productqq.title}"></span>
     <a th:href="@{/product/{id}(id=${productqq.id})}">Подробнее ...</a>
